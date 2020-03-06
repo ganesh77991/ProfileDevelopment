@@ -1,6 +1,5 @@
 package com.m.controller;
 
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +15,8 @@ import com.m.model.PersonalDetails;
 import com.m.model.ProfessionalDetails;
 import com.m.service.ProfileService;
 
-//@Controller
-public class ProfileController {
+@Controller
+public class HomeController {
 	
 	@Autowired
 	ProfileService service;
@@ -30,6 +29,18 @@ public class ProfileController {
 		return "home";
 	}
 	
+	
+	@RequestMapping("/index")
+	public String index(ModelMap map) {
+		
+		System.out.println("from controller");
+		
+		//map.addAttribute("perDetails", new PersonalDetails() );
+		
+		
+		return "index";
+		
+	}
 	
 	@RequestMapping("/")
 	public String personalDetails(ModelMap map) {
@@ -49,6 +60,9 @@ public class ProfileController {
 		
 			if (bindingResult.hasErrors()) {
 				System.out.println("ProfileController.savePerson() in side if");
+				//map.addAttribute("perDetails", new PersonalDetails() );
+				//map.addAttribute("educationDetails", new EducationalDetails());
+				//map.addAttribute("professionalDetails", new ProfessionalDetails());
 				return "personalDetails";
 			}
 		
@@ -56,10 +70,16 @@ public class ProfileController {
 		System.out.println("ProfileController.savePerson() out side if");
 		service.savePerson(pd);
 		
-		map.addAttribute("educationDetails", new EducationalDetails());
-		return "educationDetails";
+		
+		return "index";
 	}
 	
+	@RequestMapping(value="/showEducationDetails",method = RequestMethod.GET)
+	public String education(ModelMap map) {
+		
+		map.addAttribute("educationDetails", new EducationalDetails());
+			return "educationDetails";
+		}
 	
 	@RequestMapping(value="/saveEducationDetails",method = RequestMethod.POST)
 	public String saveEducationDetails(@Valid @ModelAttribute("educationDetails") EducationalDetails ed,BindingResult bindingResult,ModelMap map) {
@@ -73,7 +93,7 @@ public class ProfileController {
 		service.saveEducation(ed);
 		
 		map.addAttribute("professionalDetails", new ProfessionalDetails());
-		return "professionalDetails";
+		return "index";
 	}
 	
 	@RequestMapping(value="/saveProfessionalDetails",method = RequestMethod.POST)

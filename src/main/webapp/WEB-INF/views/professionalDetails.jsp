@@ -15,7 +15,7 @@ body {
 
 /* Add padding to containers */
 .container {
-	width: 50%;
+	width: 40%;
 	padding: 16px;
 	background-color: white;
 	float: center;
@@ -111,7 +111,7 @@ a {
     <form:checkbox path="skills" value="Php"/> Php
     <form:checkbox path="skills" value="Python"/> Python
     <form:checkbox path="skills" value="Spring"/> Spring
-    <form:checkbox path="skills" value="Hibernate"/> Hibernate
+    <form:checkbox path="skills" value="Hibernate"/> Hibernate <br> &nbsp;&nbsp;&nbsp;
     <form:checkbox path="skills" value="Angular"/> Angular
     
     
